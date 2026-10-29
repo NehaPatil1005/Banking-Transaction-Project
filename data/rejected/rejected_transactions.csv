@@ -1,0 +1,3 @@
+transaction_id,customer_id,transaction_type,amount,transaction_date,status
+T1008,C103,WITHDRAWAL,-200,2026-10-28,SUCCESS
+T1008,C103,WITHDRAWAL,700,2026-10-28,SUCCESS
