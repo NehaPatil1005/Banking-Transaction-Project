@@ -25,21 +25,26 @@ cursor = connection.cursor()
 
 # Step 3: Insert records into MySQL
 query = """
-INSERT INTO transactions
+INSERT IGNORE INTO transactions
 (transaction_id, customer_id, transaction_type, amount, transaction_date, status)
 VALUES (%s, %s, %s, %s, %s, %s)
 """
 
+inserted_count = 0
+
 for _, row in df.iterrows():
     cursor.execute(query, tuple(row))
+    inserted_count += cursor.rowcount
 
 # Step 4: Save changes
 connection.commit()
 
-print("Records inserted successfully:", cursor.rowcount)
+print("Records inserted successfully:", inserted_count)
 
 # Step 5: Close the connection
 cursor.close()
 connection.close()
 
 print("Database connection closed.")
+
+
